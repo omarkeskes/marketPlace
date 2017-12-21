@@ -13,6 +13,7 @@ var articleSchema = Schema({
   description  : String,
   prix : Number,
   quantite :Number,
+  date:Date,
   etat: String,
   marque :String,
   categorie :String,
@@ -20,7 +21,9 @@ var articleSchema = Schema({
   note : String,
   photo : String,
   type :String,
-  vendeur : { type: Schema.Types.ObjectId, ref: 'Member' }
+  acheteurs:[{ type: Schema.Types.ObjectId, ref: 'Member' }],
+  vendeur : { type: Schema.Types.ObjectId, ref: 'Member' },
+  commentaires:[{ type: Schema.Types.ObjectId, ref: 'Commentaire' }]
 
 });
 
@@ -32,12 +35,23 @@ var memberSchema = Schema({
   adresse: String,
   password :String,
   tel: String,
+  achats:[{ type: Schema.Types.ObjectId, ref: 'Article' }],
   boutique : [{ type: Schema.Types.ObjectId, ref: 'Article' }]
+
+});
+
+var commentaireSchema= Schema({
+    _id: Schema.Types.ObjectId,
+    text:String,
+    date:Date,
+    member : { type: Schema.Types.ObjectId, ref: 'Member' },
+    article: { type: Schema.Types.ObjectId, ref: 'Article' },
 
 });
 // Création du Model pour les commentaires
 var Article  = mongoose.model('Article', articleSchema);
 var Member  = mongoose.model('Member', memberSchema);
+var Commentaire  = mongoose.model('Commentaire', commentaireSchema);
 
 // Get All Tasks
 router.get('/articles', function(req, res, next){
@@ -68,78 +82,109 @@ router.get('/boutique/articles/:login', function(req, res, next){
     });
 });
 
+
 router.get('/article/:id', function(req, res, next){
-    Article.findOne({_id:req.params.id},function(err, article){
+    Article.findOne({_id:req.params.id}).
+                populate('commentaires'). // only works if we pushed refs to children
+            exec(function (err, article) {
+                    if (err) return handleError(err);
+                    res.json(article);
+            });;
+});
+
+router.post('/login',function(req,res,next){
+    Member.findOne({login:req.body.login, password:req.body.password},function(err,member){
         if(err){
             res.send(err);
         }
-        res.json(article);
+        res.json(member);
+
     });
 });
 
+router.post('/article/add',function(req,res,next){
+      var article = new Article({
+            _id: new mongoose.Types.ObjectId(),
+            titre: req.body.titre,
+            description: req.body.description,
+            quantite: parseInt(req.body.quantite),
+            provenance: req.body.provenance,
+            etat: req.body.etat,
+            date:Date.now(),
+            categorie: req.body.categorie,
+            prix: parseInt(req.body.prix),
+            marque: req.body.marque,
+            photo: "model6.jpg",
+            vendeur: req.body.vendeur   
+  });
+  article.save(function(err){
+    if (err) return handleError(err);
+    Member.findOne({_id:req.body.vendeur},function(err,member){
+        member.boutique.push(article);
+        member.save();
+    });
+    res.json(article);
+  });
+});
 
-router.get('/tasks/:id',function(req,res,next){
-    db.tasks.findOne({_id:mongojs.ObjectId(req.params.id)},function(err,task){
-        if(err){
-            res.send(err);
-        }
-        res.json(task);
+router.delete('/article/delete/:id',function(req,res,next){
+     var memberId;
+    Article.findOne({_id:req.params.id},function(err,article){
+        Article.remove({_id:req.params.id},function(err){
+            Member.
+            findOne({ _id:article.vendeur}).
+            populate('boutique'). // only works if we pushed refs to children
+            exec(function (err, member) {
+                    if (err) return handleError(err);
+                    res.json(member.boutique);
+            });
+    });
     });
 });
 
-router.post('/task',function(req,res,next){
-    var task=req.body;
-        if(!task.title || !(task.isDone + '')){
-        res.status(400);
-        res.json({
-            "error": "Bad Data"
-        });
-    } else {
-        db.tasks.save(task,function(err,task){
-            if(err){
-                res.send(err);
-            }
-            res.json(task);
-        });
-    }
+router.get('/commentaires/:id',function(req,res,next){
+    Commentaire.find({article:req.params.id}).
+    populate('member'). // only works if we pushed refs to children
+    exec(function (err, commentaires) {
+            if (err) return handleError(err);
+            res.json(commentaires);
+    });;
 });
 
-// Delete Task
-router.delete('/task/:id', function(req, res, next){
-    db.tasks.remove({_id: mongojs.ObjectId(req.params.id)}, function(err, task){
-        if(err){
-            res.send(err);
-        }
-        res.json(task);
+router.post('/commentaire/add',function(req,res,next){
+      var commentaire = new Commentaire({
+            _id: new mongoose.Types.ObjectId(),
+            text: req.body.text,
+            date:Date.now(),
+            member: req.body.member,  
+           article: req.body.article, 
+  });
+  commentaire.save(function(err){
+    if (err) return handleError(err);
+        res.json(commentaire);
+  });
+});
+
+router.post('/achat/add',function(req,res,next){
+    Article.findOne({_id:req.body.article},function(err,article){   
+            Member.findOne({ _id:req.body.member},function(err,member){
+                member.achats.push(article);
+                member.save();
+                res.json(member);
+            }); 
+
     });
 });
 
-// Update Task
-router.put('/task/:id', function(req, res, next){
-    var task = req.body;
-    var updTask = {};
-    
-    if(task.isDone){
-        updTask.isDone = task.isDone;
-    }
-    
-    if(task.title){
-        updTask.title = task.title;
-    }
-    
-    if(!updTask){
-        res.status(400);
-        res.json({
-            "error":"Bad Data"
-        });
-    } else {
-        db.tasks.update({_id: mongojs.ObjectId(req.params.id)},updTask, {}, function(err, task){
-        if(err){
-            res.send(err);
-        }
-        res.json(task);
+router.get('/achats/:id',function(req,res,next){
+    Member.
+    findOne({ _id:req.params.id}).
+    populate('achats'). // only works if we pushed refs to children
+    exec(function (err, member) {
+            if (err) return handleError(err);
+            res.json(member.achats);
     });
-    }
 });
+
 
 module.exports = router;

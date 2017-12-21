@@ -16,47 +16,15 @@
         <div class="row margin-bottom-40">
           <!-- BEGIN SIDEBAR -->
           <div class="sidebar col-md-3 col-sm-5">
-                        <ul class="list-group margin-bottom-25 sidebar-menu">
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Ladies</a></li>
-              <li class="list-group-item clearfix dropdown">
-                <a href="shop-product-list.html">
-                  <i class="fa fa-angle-right"></i>
-                  Mens
-                  
-                </a>
-                <ul class="dropdown-menu">
-                  <li class="list-group-item dropdown clearfix">
-                    <a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Shoes </a>
-                      <ul class="dropdown-menu">
-                        <li class="list-group-item dropdown clearfix">
-                          <a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Classic </a>
-                          <ul class="dropdown-menu">
-                            <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Classic 1</a></li>
-                            <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Classic 2</a></li>
-                          </ul>
-                        </li>
-                        <li class="list-group-item dropdown clearfix">
-                          <a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Sport  </a>
-                          <ul class="dropdown-menu">
-                            <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Sport 1</a></li>
-                            <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Sport 2</a></li>
-                          </ul>
-                        </li>
-                      </ul>
-                  </li>
-                  <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Trainers</a></li>
-                  <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Jeans</a></li>
-                  <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Chinos</a></li>
-                  <li><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> T-Shirts</a></li>
-                </ul>
-              </li>
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Kids</a></li>
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Accessories</a></li>
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Sports</a></li>
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Brands</a></li>
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Electronics</a></li>
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Home & Garden</a></li>
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Custom Link</a></li>
+                                    <ul class="list-group margin-bottom-25 sidebar-menu">
+              <li class="list-group-item clearfix"><a ><i class="fa fa-angle-right"></i> Ladies</a></li>
+              <li class="list-group-item clearfix"><a ><i class="fa fa-angle-right"></i> Kids</a></li>
+              <li class="list-group-item clearfix"><a ><i class="fa fa-angle-right"></i> Accessories</a></li>
+              <li class="list-group-item clearfix"><a><i class="fa fa-angle-right"></i> Sports</a></li>
+              <li class="list-group-item clearfix"><a ><i class="fa fa-angle-right"></i> Brands</a></li>
+              <li class="list-group-item clearfix"><a><i class="fa fa-angle-right"></i> Electronics</a></li>
+              <li class="list-group-item clearfix"><a><i class="fa fa-angle-right"></i> Home & Garden</a></li>
+              <li class="list-group-item clearfix"><a><i class="fa fa-angle-right"></i> Custom Link</a></li>
             </ul>
 
             <div class="sidebar-filter margin-bottom-25">
@@ -105,7 +73,7 @@
                 <div class="col-md-6">
                   <form action="#">
                     <div class="input-group">
-                      <input type="text" placeholder="Search again" class="form-control">
+                      <input [(ngModel)]='listFilter' name='listFilter' type="text" placeholder="Search again" class="form-control">
                       <span class="input-group-btn">
                         <button class="btn btn-primary" type="submit">Search</button>
                       </span>
@@ -149,7 +117,7 @@
             <!-- BEGIN PRODUCT LIST -->
             <div class="row product-list">
               <!-- PRODUCT ITEM START -->
-              <div *ngFor="let article of articles" class="col-md-4 col-sm-6 col-xs-12">
+              <div *ngFor="let article of articles | articleFilter:listFilter" class="col-md-4 col-sm-6 col-xs-12">
                 <div class="product-item">
                   <div class="pi-img-wrapper">
                     <img src="assets/pages/img/products/{{article.photo}}" class="img-responsive" alt="Berry Lace Dress">
@@ -160,7 +128,7 @@
                   </div>
                   <h3><a [routerLink]="['/article/',article._id]">{{article.titre}}</a></h3>
                   <div class="pi-price">{{article.prix}} DT</div>
-                  <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
+                  <a (click)='acheter(article._id)' href="javascript:;" class="btn btn-default add2cart">Acheter</a>
                 </div>
               </div>
               <!-- PRODUCT ITEM END -->

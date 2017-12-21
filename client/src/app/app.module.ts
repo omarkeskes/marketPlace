@@ -6,8 +6,9 @@ import { FormsModule} from '@angular/forms';
 import { MarketplaceModule } from './marketplace/marketplace.module';
 import { MarketplaceRoutingModule } from './marketplace/marketplace-routing.module';
 import { LoginComponent } from './login/login.component';
+import { LoginService } from './login/login.service';
 import { CreerCompteComponent } from './login/creer-compte/creer-compte.component';
-
+import { Routes, RouterModule } from '@angular/router';
 @NgModule({
   declarations: [
     AppComponent,
@@ -15,14 +16,16 @@ import { CreerCompteComponent } from './login/creer-compte/creer-compte.componen
     CreerCompteComponent
   ],
   imports: [
-    BrowserModule,
     HttpModule,
     FormsModule,
     BrowserModule,
     MarketplaceModule,
-    MarketplaceRoutingModule
+    MarketplaceRoutingModule,
+    RouterModule.forRoot([
+      {path:'login',component:LoginComponent}
+    ])
   ],
-  providers: [],
+  providers: [LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

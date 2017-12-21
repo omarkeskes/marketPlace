@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router';
 import { ArticlesService } from './articles.service';
+import { LoginService } from './../../login/login.service';
 @Component({
   moduleId:module.id,
   templateUrl: './articles.component.html',
@@ -9,8 +10,9 @@ import { ArticlesService } from './articles.service';
 export class ArticlesComponent implements OnInit {
   categorie:any;
   articles:any;
+  listFilter:String;
 
-  constructor(private articlesService:ArticlesService,private route: ActivatedRoute,private router:Router) { 
+  constructor(private loginservice:LoginService,private articlesService:ArticlesService,private route: ActivatedRoute,private router:Router) { 
      this.route.params.subscribe(params => {
        this.categorie = params['categorie'];
        this.articlesService.getArtilcesByCategories(this.categorie).subscribe(
@@ -24,6 +26,18 @@ export class ArticlesComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  acheter(id:any){
+    var data={
+      article:id,
+      member:this.loginservice.getUser()._id
+    }
+    this.articlesService.acheterArticle(data).subscribe(
+      data=> {console.log(data)},
+      err =>{console.log(err)},
+      ()=>{}
+    );
   }
 
 }

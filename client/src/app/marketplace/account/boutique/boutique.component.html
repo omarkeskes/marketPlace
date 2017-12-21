@@ -7,17 +7,19 @@
         <!-- BEGIN SIDEBAR & CONTENT -->
         <div class="row margin-bottom-40">
           <!-- BEGIN SIDEBAR -->
+
           <div class="sidebar col-md-3 col-sm-5">
             <ul class="list-group margin-bottom-25 sidebar-menu">
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Ladies</a></li>
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Kids</a></li>
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Accessories</a></li>
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Sports</a></li>
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Brands</a></li>
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Electronics</a></li>
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Home & Garden</a></li>
-              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Custom Link</a></li>
+              <li class="list-group-item clearfix"><a ><i class="fa fa-angle-right"></i> Ladies</a></li>
+              <li class="list-group-item clearfix"><a ><i class="fa fa-angle-right"></i> Kids</a></li>
+              <li class="list-group-item clearfix"><a ><i class="fa fa-angle-right"></i> Accessories</a></li>
+              <li class="list-group-item clearfix"><a><i class="fa fa-angle-right"></i> Sports</a></li>
+              <li class="list-group-item clearfix"><a ><i class="fa fa-angle-right"></i> Brands</a></li>
+              <li class="list-group-item clearfix"><a><i class="fa fa-angle-right"></i> Electronics</a></li>
+              <li class="list-group-item clearfix"><a><i class="fa fa-angle-right"></i> Home & Garden</a></li>
+              <li class="list-group-item clearfix"><a><i class="fa fa-angle-right"></i> Custom Link</a></li>
             </ul>
+            <a [routerLink]="['/add']"><button class="btn btn-primary" type="submit">Add Article</button></a>
           </div>
           <!-- END SIDEBAR -->
 
@@ -32,6 +34,7 @@
                     <th class="goods-page-image">Image</th>
                     <th class="goods-page-description">Description</th>
                     <th class="goods-page-stock">Stock</th>
+                    <th class="goods-page-quantity">Quantity</th>
                     <th class="goods-page-price" colspan="2">Unit price</th>
                   </tr>
                   <tr *ngFor='let article of articles'>
@@ -46,11 +49,16 @@
                     <td class="goods-page-stock">
                       In Stock
                     </td>
+                                        <td class="goods-page-quantity">
+                      <div class="product-quantity">
+                          <input id="product-quantity2" type="text" value="1" readonly class="form-control input-sm">
+                      </div>
+                    </td>
                     <td class="goods-page-price">
                       <strong>{{article.prix}} <span>DT</span></strong>
                     </td>
                     <td class="del-goods-col">
-                      <a class="del-goods" href="javascript:;">&nbsp;</a>
+                      <a class="del-goods" href="javascript:;" (click)='delete(article._id)'>&nbsp;</a>
                       <a class="add-goods" href="javascript:;">&nbsp;</a>
                     </td>
                   </tr>

@@ -15,7 +15,7 @@
                         <!-- END CURRENCIES -->
                         <!-- BEGIN LANGS -->
                         <li class="langs-block">
-                            <a href="javascript:void(0);" class="current">French</a>
+                            <a href="javascript:void(0);" class="current">Français</a>
                             <div class="langs-block-others-wrapper"><div class="langs-block-others">
                               <a href="javascript:void(0);">English</a>
                               <a href="javascript:void(0);">Germany</a>
@@ -30,9 +30,10 @@
                 <div class="col-md-6 col-sm-6 additional-nav">
                     <ul class="list-unstyled list-inline pull-right">
                         <li><a href="shop-account.html">Compte</a></li>
-                        <li><a [routerLink]="['/boutique/omarkeskes']">Boutique</a></li>
-                        <li><a href="shop-checkout.html">Checkout</a></li>
-                        <li><a href="page-login.html">Log In</a></li>
+                        <li *ngIf='loginservice.getUser()'><a [routerLink]="['/boutique/',loginservice.getUser().login]">Boutique</a></li>
+                        <li *ngIf='loginservice.getUser()'><a [routerLink]="['/achats/',loginservice.getUser()._id]">Achats</a></li>
+                        <li><a [routerLink]="['/login']">Log In</a></li>
+                        
                     </ul>
                 </div>
                 <!-- END TOP BAR MENU -->
@@ -87,7 +88,7 @@
         <div class="header-navigation">
           <ul>
             <li><a [routerLink]="['/home']">Accueil</a></li>
-            <li class="dropdown active">
+            <li >
               <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
                 Categories
                 

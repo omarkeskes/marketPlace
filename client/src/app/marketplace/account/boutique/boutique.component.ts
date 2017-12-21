@@ -9,7 +9,6 @@ import { BoutiqueService } from './boutique.service';
 })
 export class BoutiqueComponent implements OnInit {
 
-
   articles:any;
   login:any;
   constructor(private boutiqueService:BoutiqueService ,private route: ActivatedRoute,private router:Router) {
@@ -25,6 +24,13 @@ export class BoutiqueComponent implements OnInit {
    }
 
   ngOnInit() {
+  }
+
+  delete(id:any){
+    this.boutiqueService.deleteArticle(id).subscribe(
+      data => {this.articles=data,console.log(data)},
+      err=>{console.log(err)}
+    );
   }
 
 }

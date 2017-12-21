@@ -14,6 +14,7 @@ var articleSchema = Schema({
   etat: String,
   marque :String,
   categorie :String,
+  date:Date,
   provenance: String,
   note : String,
   photo : String,
@@ -59,6 +60,7 @@ member.save(function (err) {
     etat: "Neuf",
     categorie: "Vêtements, accessoires",
     prix: 30,
+    date:Date.now(),
     marque: "Pepe Jeans",
     photo: "model6.jpg",
     vendeur: member._id    
@@ -71,6 +73,7 @@ member.save(function (err) {
     quantite: 3,
     provenance: "Tunis",
     etat: "Neuf",
+    date:Date.now(),
     categorie: "Vêtements, accessoires",
     prix: 45,
     marque: "Chanel",

@@ -1,0 +1,115 @@
+    <div class="main">
+      <div class="container">
+        <ul class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="">Boutique</a></li>
+            <li class="active">Add Article</li>
+        </ul>
+        <!-- BEGIN SIDEBAR & CONTENT -->
+        <div class="row margin-bottom-40">
+          <!-- BEGIN SIDEBAR -->
+          <div class="sidebar col-md-3 col-sm-5">
+            <ul class="list-group margin-bottom-25 sidebar-menu">
+              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Ladies</a></li>
+              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Kids</a></li>
+              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Accessories</a></li>
+              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Sports</a></li>
+              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Brands</a></li>
+              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Electronics</a></li>
+              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Home &amp; Garden</a></li>
+              <li class="list-group-item clearfix"><a href="shop-product-list.html"><i class="fa fa-angle-right"></i> Custom Link</a></li>
+            </ul>
+          </div>
+          <!-- END SIDEBAR -->
+
+          <!-- BEGIN CONTENT -->
+          <div class="col-md-9 col-sm-7">
+            <h1>Ajout d'article</h1>
+            <div class="content-form-page">
+              <form role="form" class="form-horizontal form-without-legend">
+                <div class="form-group">
+                  <label class="col-lg-2 control-label" for="first-name">Titre <span class="require">*</span></label>
+                  <div class="col-lg-8">
+                    <input type="text" [(ngModel)] = "titre" name="titre" id="titre" class="form-control">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-lg-2 control-label" for="last-name">Prix <span class="require">*</span></label>
+                  <div class="col-lg-8">
+                    <input type="text" [(ngModel)] = "prix" name="prix" id="first-name" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-2 control-label" for="email">Quantité <span class="require">*</span></label>
+                  <div class="col-lg-8">
+                    <input type="text" [(ngModel)] = "quantite" name="quantite" id="email" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-md-2 control-label">Catégorie <span class="require">*</span></label>
+                  <div class="col-md-8">
+                    <select class="form-control" [(ngModel)] = "categorie" name="categorie">
+                          <option *ngFor="let cat of categories" [ngValue]="cat" >{{cat}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-2 control-label" for="email">Etat <span class="require">*</span></label>
+                  <div class="col-lg-8">
+                    <input type="text" [(ngModel)] = "etat" name="etat" id="email" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-2 control-label" for="email">Provenance <span class="require">*</span></label>
+                  <div class="col-lg-8">
+                    <input type="text" [(ngModel)] = "provenance" name="provenance" id="email" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-2 control-label" for="telephone">Marque <span class="require">*</span></label>
+                  <div class="col-lg-8">
+                    <input type="text" [(ngModel)] = "marque" name="marque" id="telephone" class="form-control">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-lg-2 control-label">Checkboxes</label>
+                  <div class="col-lg-8 checkbox-list">
+                    <label>
+                      <input type="checkbox"> Checkbox 1
+                    </label>
+                    <label>
+                      <input type="checkbox"> Checkbox 2
+                    </label>
+                    <label>
+                      <input type="checkbox" disabled> Disabled
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-2 control-label">Photo</label>
+                  <div class="col-lg-8">
+                    <input type="file">
+                    <p class="help-block">some help text here.</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-2 control-label" for="message">Description</label>
+                  <div class="col-lg-8">
+                    <textarea [(ngModel)] = "description" name="description" class="form-control" rows="6"></textarea>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-8 col-md-offset-2 padding-left-0 padding-top-20">
+                    <button (click)='add()' class="btn btn-primary" type="submit">Sauvegarder</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <!-- END CONTENT -->
+        </div>
+        <!-- END SIDEBAR & CONTENT -->
+      </div>
+    </div>
