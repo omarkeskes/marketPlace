@@ -22,7 +22,8 @@ import { Routes, RouterModule } from '@angular/router';
     MarketplaceModule,
     MarketplaceRoutingModule,
     RouterModule.forRoot([
-      {path:'login',component:LoginComponent}
+      {path:'login',component:LoginComponent},
+      {path:'register',component:CreerCompteComponent}
     ])
   ],
   providers: [LoginService],
