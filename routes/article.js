@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-
+var bcrypt = require('bcrypt');
 mongoose.connect('mongodb://omar:omar@ds159926.mlab.com:59926/market_place', function(err) {
   if (err) { throw err; }
 });
@@ -93,15 +93,48 @@ router.get('/article/:id', function(req, res, next){
 });
 
 router.post('/login',function(req,res,next){
-    Member.findOne({login:req.body.login, password:req.body.password},function(err,member){
+    
+    Member.findOne({login:req.body.login},function(err,member){
+        if(err){
+            res.send(err);
+        }
+        if(bcrypt.compareSync(req.body.password, member.password)){
+        res.json(member);
+        }else {
+            var status = {
+                "status" : "password failed"
+            }
+            res.send(status);
+        }
+
+    });
+});
+
+router.post('/register',function(req,res,next){
+    /*Member.findOne({login:req.body.login, password:req.body.password},function(err,member){
         if(err){
             res.send(err);
         }
         res.json(member);
 
-    });
-});
+    });*/
+    var hash = bcrypt.hashSync(req.body.password,10);
+    var membre = new Member({
+        _id : new mongoose.Types.ObjectId(),
+        name   : req.body.name,
+        login  : req.body.mail,
+        mail : req.body.mail,
+        adresse: req.body.adresse,
+        password :hash,
+        tel: req.body.tel,
 
+    });
+    membre.save(function(err,membre){
+        if(err) res.send(err);
+        res.json(membre);
+    })
+
+});
 router.post('/article/add',function(req,res,next){
       var article = new Article({
             _id: new mongoose.Types.ObjectId(),

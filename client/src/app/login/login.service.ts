@@ -22,4 +22,14 @@ export class LoginService {
     return JSON.parse(sessionStorage.getItem('login'));
   }
 
+  register(data :any){
+    var headers=new Headers();
+    headers.append('Content-type','Application/json');
+    return this.http.post('/api/market/register',JSON.stringify(data),{headers:headers}).map(
+        (response:Response)=>{
+          return response.json();
+        }
+    );
+  }
+
 }
