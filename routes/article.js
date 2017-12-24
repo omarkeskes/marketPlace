@@ -218,6 +218,35 @@ router.get('/achats/:id',function(req,res,next){
             res.json(member.achats);
     });
 });
+router.get('/user/:id',function(req,res,next){
+    Member.findById(req.params.id,function(err,membre){
+        if(err){
+            res.send(err);
+        }
+        res.json(membre);
+    })
+})
+router.post('/user/update',function(req,res,next){
+    Member.findById(req.body.id,function(err,membre){
+        if(err){
+            res.send(err);
+        }else {
+            membre.name = req.body.name;
+            membre.tel = req.body.tel;
+            membre.adresse = req.body.adresse;
+            membre.login = req.body.mail;
+            membre.mail = req.body.mail;
 
+            if(req.body.password){
+                var hash = bcrypt.hashSync(req.body.password,10);
+                membre.password = hash;
+            }
+            membre.save();
+            res.json(membre);
+
+        }
+        
+    })
+})
 
 module.exports = router;

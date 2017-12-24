@@ -9,11 +9,14 @@ import { LoginComponent } from './login/login.component';
 import { LoginService } from './login/login.service';
 import { CreerCompteComponent } from './login/creer-compte/creer-compte.component';
 import { Routes, RouterModule } from '@angular/router';
+import { CompteComponent } from './compte/compte.component';
+import {CompteService} from './compte/compte.service';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    CreerCompteComponent
+    CreerCompteComponent,
+    CompteComponent
   ],
   imports: [
     HttpModule,
@@ -23,10 +26,11 @@ import { Routes, RouterModule } from '@angular/router';
     MarketplaceRoutingModule,
     RouterModule.forRoot([
       {path:'login',component:LoginComponent},
-      {path:'register',component:CreerCompteComponent}
+      {path:'register',component:CreerCompteComponent},
+      {path:'compte',component:CompteComponent}
     ])
   ],
-  providers: [LoginService],
+  providers: [LoginService,CompteService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

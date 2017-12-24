@@ -29,9 +29,10 @@
                 <!-- BEGIN TOP BAR MENU -->
                 <div class="col-md-6 col-sm-6 additional-nav">
                     <ul class="list-unstyled list-inline pull-right">
-                        <li *ngIf='loginservice.isAuthenticated()'><a href="shop-account.html">Compte</a></li>
+                        <li *ngIf='loginservice.isAuthenticated()'><a [routerLink]="['/compte']">Compte</a></li>
                         <li *ngIf='loginservice.isAuthenticated()'><a [routerLink]="['/boutique/',loginservice.getUser().login]">Boutique</a></li>
                         <li *ngIf='loginservice.isAuthenticated()'><a [routerLink]="['/achats/',loginservice.getUser()._id]">Achats</a></li>
+                        <li *ngIf='loginservice.isAuthenticated()'><a (click)="logout()">deconnexion</a></li>
                         <li *ngIf='!loginservice.isAuthenticated()'><a [routerLink]="['/login']">Log In</a></li>
                         <li *ngIf='!loginservice.isAuthenticated()'><a [routerLink]="['/register']">Crèer un compte</a></li>   
                     </ul>

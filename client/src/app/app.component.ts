@@ -11,4 +11,7 @@ export class AppComponent {
   constructor(private loginservice:LoginService){
       
   }
+  logout(){
+    sessionStorage.removeItem('login');
+  }
 }
