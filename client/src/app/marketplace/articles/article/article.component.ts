@@ -17,7 +17,12 @@ export class ArticleComponent implements OnInit {
   constructor(private loginservice:LoginService,private articlesService:ArticlesService,private route: ActivatedRoute,private router:Router) {
          this.route.params.subscribe(params => {
        this.id = params['id'];
-       this.articlesService.getOneArtilce(this.id).subscribe(
+       
+    });
+   }
+
+  ngOnInit() {
+    this.articlesService.getOneArtilce(this.id).subscribe(
           data =>{this.article=data;console.log(this.article)},
           err => {console.log(err)},
           ()=> {}
@@ -27,14 +32,11 @@ export class ArticleComponent implements OnInit {
           err => {console.log(err)},
           ()=> {}
       )
-    });
-   }
-
-  ngOnInit() {
   }
 
-
+  error : boolean = false;
   acheter(){
+    if (parseInt(document.getElementById("product-quantity").getAttribute("value")) > this.article.quantite){
     var data={
       article:this.article._id,
       member:this.loginservice.getUser()._id
@@ -44,6 +46,9 @@ export class ArticleComponent implements OnInit {
       err =>{console.log(err)},
       ()=>{}
     );
+    }else {
+      this.error = true ;
+    }
   }
   
   commentaire(){

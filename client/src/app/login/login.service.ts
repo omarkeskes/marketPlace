@@ -22,6 +22,17 @@ export class LoginService {
     return JSON.parse(sessionStorage.getItem('login'));
   }
 
+
+  isAuthenticated(){
+    if(sessionStorage.getItem('login')){
+      return true ;
+
+    }
+    else { 
+      return false;
+    }
+  }
+
   register(data :any){
     var headers=new Headers();
     headers.append('Content-type','Application/json');

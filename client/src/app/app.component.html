@@ -29,11 +29,11 @@
                 <!-- BEGIN TOP BAR MENU -->
                 <div class="col-md-6 col-sm-6 additional-nav">
                     <ul class="list-unstyled list-inline pull-right">
-                        <li><a href="shop-account.html">Compte</a></li>
-                        <li *ngIf='loginservice.getUser()'><a [routerLink]="['/boutique/',loginservice.getUser().login]">Boutique</a></li>
-                        <li *ngIf='loginservice.getUser()'><a [routerLink]="['/achats/',loginservice.getUser()._id]">Achats</a></li>
-                        <li><a [routerLink]="['/login']">Log In</a></li>
-                        
+                        <li *ngIf='loginservice.isAuthenticated()'><a href="shop-account.html">Compte</a></li>
+                        <li *ngIf='loginservice.isAuthenticated()'><a [routerLink]="['/boutique/',loginservice.getUser().login]">Boutique</a></li>
+                        <li *ngIf='loginservice.isAuthenticated()'><a [routerLink]="['/achats/',loginservice.getUser()._id]">Achats</a></li>
+                        <li *ngIf='!loginservice.isAuthenticated()'><a [routerLink]="['/login']">Log In</a></li>
+                        <li *ngIf='!loginservice.isAuthenticated()'><a [routerLink]="['/register']">Crèer un compte</a></li>   
                     </ul>
                 </div>
                 <!-- END TOP BAR MENU -->
@@ -50,7 +50,7 @@
         <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
 
         <!-- BEGIN CART -->
-        <div class="top-cart-block">
+        <div  *ngIf='loginservice.isAuthenticated()' class="top-cart-block">
           <div class="top-cart-info">
             <a href="javascript:void(0);" class="top-cart-info-count">3 items</a>
             <a href="javascript:void(0);" class="top-cart-info-value">$1260</a>

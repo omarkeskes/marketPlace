@@ -74,11 +74,15 @@
           <!-- END SIDEBAR -->
 
           <!-- BEGIN CONTENT -->
-          <div class="col-md-9 col-sm-7">
+          
+          <div  class="col-md-9 col-sm-7">
+            <div *ngIf="error" class="alert alert-danger">
+            <strong>Error</strong> la quantité demandé n'est pas disponible
+          </div>
             <div class="product-page">
               <div class="row">
                 <div class="col-md-6 col-sm-6">
-                  <div class="product-main-image">
+                  <div *ngIf="article" class="product-main-image">
                     <img src="assets/pages/img/products/{{article.photo}}" alt="Cool green dress with red bell" class="img-responsive" data-BigImgsrc="assets/pages/img/products/article.photo">
                   </div>
                   <div class="product-other-images">
@@ -88,20 +92,23 @@
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-6">
-                  <h1>{{article.titre}}</h1>
-                  <div class="price-availability-block clearfix">
+                  <h1 *ngIf="article">{{article.titre}}</h1>
+                  <div *ngIf="article" class="price-availability-block clearfix">
                     <div class="price">
                       <strong>{{article.prix}}<span> DT</span></strong>
                       <em>$<span>62.00</span></em>
                     </div>
-                    <div class="availability">
+                    <div *ngIf='article.quantite > 0' class="availability">
                       Availability: <strong>In Stock</strong>
                     </div>
+                    <div *ngIf='article.quantite == 0' class="availability">
+                      Availability: <strong>Epuisé</strong>
+                    </div>
                   </div>
-                  <div class="description">
+                  <div *ngIf="article" class="description">
                     <p>{{article.description}}</p>
                   </div>
-                  <div class="product-page-options">
+                  <div *ngIf="article" class="product-page-options">
                     <div class="pull-left">
                       <label class="control-label">Size:</label>
                       <select class="form-control input-sm">
@@ -119,12 +126,14 @@
                       </select>
                     </div>
                   </div>
+                  <!--<div *ngIf='loginservice.isAuthenticated()'>-->
                   <div class="product-page-cart">
                     <div class="product-quantity">
                         <input id="product-quantity" type="text" value="1" readonly class="form-control input-sm">
                     </div>
                     <button (click)='acheter()' class="btn btn-primary" type="submit">Acheter</button>
                   </div>
+                  <!--</div>-->
                   <div class="review">
                     <input type="range" value="4" step="0.25" id="backing4">
                     <div class="rateit" data-rateit-backingfld="#backing4" data-rateit-resetable="false"  data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5">
@@ -190,7 +199,7 @@
                         </div>
                       </div>
                       <!-- BEGIN FORM-->
-                      <form class="reviews-form" role="form">
+                      <form *ngIf='loginservice.isAuthenticated()' class="reviews-form" role="form">
                         <h2>Ecrire un commentaire</h2>
                         <div class="form-group">
                           <textarea [(ngModel)]="text" name="text" class="form-control" rows="5" id="review" placeholder="Add Comment"></textarea>
