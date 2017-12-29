@@ -14,6 +14,7 @@ import { AchatsComponent } from './account/achats/achats.component';
 import { AddComponent } from './account/boutique/add/add.component';
 import { FormsModule} from '@angular/forms';
 import { ArticleFilterPipe } from './articles/article-filter.pipe';
+import { RechercheComponent } from './articles/recherche/recherche.component';
 @NgModule({
   imports: [
     FormsModule,
@@ -21,7 +22,7 @@ import { ArticleFilterPipe } from './articles/article-filter.pipe';
     CommonModule,
     MarketplaceRoutingModule
   ],
-  declarations: [MarketplaceComponent, ArticlesComponent, ArticleComponent,  AccountComponent, BoutiqueComponent, AchatsComponent, AddComponent, ArticleFilterPipe],
+  declarations: [MarketplaceComponent, ArticlesComponent, ArticleComponent,  AccountComponent, BoutiqueComponent, AchatsComponent, AddComponent, ArticleFilterPipe, RechercheComponent],
   providers:[MarketplaceService,ArticlesService,BoutiqueService ]
 })
 export class MarketplaceModule { }

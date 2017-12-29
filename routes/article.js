@@ -156,6 +156,7 @@ router.post('/article/add',function(req,res,next){
             vendeur: req.body.vendeur   
   });
   article.save(function(err){
+      
     if (err) return handleError(err);
     Member.findOne({_id:req.body.vendeur},function(err,member){
         member.boutique.push(article);
