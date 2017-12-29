@@ -105,7 +105,7 @@ router.post('/login',function(req,res,next){
             res.send(err);
         }
         if(bcrypt.compareSync(req.body.password, member.password)){
-        res.json(member);
+            res.json(member);
         }else {
             var status = {
                 "status" : "password failed"

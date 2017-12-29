@@ -36,7 +36,9 @@ export class ArticleComponent implements OnInit {
 
   error : boolean = false;
   acheter(){
-    if (parseInt(document.getElementById("product-quantity").getAttribute("value")) > this.article.quantite){
+    console.log(this.article.quantite);
+    console.log(parseInt(document.getElementById("product-quantity").getAttribute("value")));
+    if (parseInt(document.getElementById("product-quantity").getAttribute("value")) <= this.article.quantite){
     var data={
       article:this.article._id,
       member:this.loginservice.getUser()._id
