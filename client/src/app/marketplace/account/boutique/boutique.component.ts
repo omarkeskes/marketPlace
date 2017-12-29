@@ -11,6 +11,8 @@ export class BoutiqueComponent implements OnInit {
 
   articles:any;
   login:any;
+    listFilter:String;
+    
   constructor(private boutiqueService:BoutiqueService ,private route: ActivatedRoute,private router:Router) {
          this.route.params.subscribe(params => {
        this.login = params['login'];

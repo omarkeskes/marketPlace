@@ -30,11 +30,17 @@ var articleSchema = Schema({
 var memberSchema = Schema({
     _id: Schema.Types.ObjectId,
   name   : String,
+  prenom   : String,
   login  : String,
   mail : String,
+  campany:String,
   adresse: String,
+  ville: String,
+  pays: String,
+  poste: String,
   password :String,
   tel: String,
+  fax: String,
   achats:[{ type: Schema.Types.ObjectId, ref: 'Article' }],
   boutique : [{ type: Schema.Types.ObjectId, ref: 'Article' }]
 
@@ -111,18 +117,17 @@ router.post('/login',function(req,res,next){
 });
 
 router.post('/register',function(req,res,next){
-    /*Member.findOne({login:req.body.login, password:req.body.password},function(err,member){
-        if(err){
-            res.send(err);
-        }
-        res.json(member);
-
-    });*/
     var hash = bcrypt.hashSync(req.body.password,10);
     var membre = new Member({
         _id : new mongoose.Types.ObjectId(),
         name   : req.body.name,
-        login  : req.body.mail,
+        login  : req.body.login,
+        prenom  : req.body.prenom,
+        ville  : req.body.ville,
+        poste  : req.body.poste,
+        company : req.body.company,
+        fax  : req.body.fax,
+        pays : req.body.pays,
         mail : req.body.mail,
         adresse: req.body.adresse,
         password :hash,
@@ -147,7 +152,7 @@ router.post('/article/add',function(req,res,next){
             categorie: req.body.categorie,
             prix: parseInt(req.body.prix),
             marque: req.body.marque,
-            photo: "model6.jpg",
+            photo: "model7.jpg",
             vendeur: req.body.vendeur   
   });
   article.save(function(err){

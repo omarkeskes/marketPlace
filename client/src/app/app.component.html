@@ -31,10 +31,10 @@
                     <ul class="list-unstyled list-inline pull-right">
                         <li *ngIf='loginservice.isAuthenticated()'><a [routerLink]="['/compte']">Compte</a></li>
                         <li *ngIf='loginservice.isAuthenticated()'><a [routerLink]="['/boutique/',loginservice.getUser().login]">Boutique</a></li>
-                        <li *ngIf='loginservice.isAuthenticated()'><a [routerLink]="['/achats/',loginservice.getUser()._id]">Achats</a></li>
+                        <li *ngIf='loginservice.isAuthenticated()'><a [routerLink]="['/achats/',loginservice.getUser()._id]">Panier</a></li>
                         <li *ngIf='loginservice.isAuthenticated()'><a (click)="logout()">deconnexion</a></li>
                         <li *ngIf='!loginservice.isAuthenticated()'><a [routerLink]="['/login']">Log In</a></li>
-                        <li *ngIf='!loginservice.isAuthenticated()'><a [routerLink]="['/register']">Crèer un compte</a></li>   
+                        <li *ngIf='!loginservice.isAuthenticated()'><a [routerLink]="['/login']">Crèer un compte</a></li>   
                     </ul>
                 </div>
                 <!-- END TOP BAR MENU -->
@@ -53,14 +53,14 @@
         <!-- BEGIN CART -->
         <div  *ngIf='loginservice.isAuthenticated()' class="top-cart-block">
           <div class="top-cart-info">
-            <a href="javascript:void(0);" class="top-cart-info-count">3 items</a>
-            <a href="javascript:void(0);" class="top-cart-info-value">$1260</a>
+            <a href="javascript:void(0);" class="top-cart-info-count">3 Articles</a>
+            <a href="javascript:void(0);" class="top-cart-info-value">1260 DT</a>
           </div>
           <i class="fa fa-shopping-cart"></i>
                         
           <div class="top-cart-content-wrapper">
             <div class="top-cart-content">
-              <ul class="scroller" style="height: 250px;">
+              <ul class="scroller" style="height: 50px;">
                 <li>
                   <a href="shop-item.html"><img src="assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
                   <span class="cart-content-count">x 1</span>
@@ -72,13 +72,13 @@
                   <a href="shop-item.html"><img src="assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
                   <span class="cart-content-count">x 1</span>
                   <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
-                  <em>$1230</em>
+                  <em>1230 DT</em>
                   <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
                 </li>
               </ul>
               <div class="text-right">
-                <a [routerLink]="['achats']" class="btn btn-default">View Cart</a>
-                <a href="shop-checkout.html" class="btn btn-primary">Checkout</a>
+                <a [routerLink]="['/achats/',loginservice.getUser()._id]"  class="btn btn-primary">Panier</a>
+                <a class="btn btn-default">Checkout</a>
               </div>
             </div>
           </div>            
@@ -113,8 +113,8 @@
               </ul>
             </li>
 
-            <li><a href="shop-item.html">Recherche approfondie</a></li>
-            <li><a href="shop-item.html">Aide</a></li>
+            <li><a >Recherche approfondie</a></li>
+            <li><a >Aide</a></li>
 
             <!-- BEGIN TOP SEARCH -->
             <li class="menu-search">

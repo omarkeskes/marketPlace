@@ -131,7 +131,7 @@
                     <div class="product-quantity">
                         <input id="product-quantity" type="text" value="1" readonly class="form-control input-sm">
                     </div>
-                    <button (click)='acheter()' class="btn btn-primary" type="submit">Acheter</button>
+                    <button (click)='acheter()' class="btn btn-primary" type="submit">Ajouter au panier</button>
                   </div>
                   <!--</div>-->
                   <div class="review">
@@ -190,7 +190,7 @@
                       <!--<p>There are no reviews for this product.</p>-->
                       <div *ngFor='let com of commentaires' class="review-item clearfix">
                         <div class="review-item-submitted">
-                          <strong>{{com.member.name}}</strong>
+                          <strong>{{com.member.name}} {{com.member.prenom}}</strong>
                           <em>{{com.date | date: 'EEEE, dd MMMM yyyy, hh:mm:ss a'}}</em>
                           <div class="rateit" data-rateit-value="5" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
                         </div>                                              

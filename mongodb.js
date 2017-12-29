@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-
+var bcrypt = require('bcrypt');
 mongoose.connect('mongodb://omar:omar@ds159926.mlab.com:59926/market_place', function(err) {
   if (err) { throw err; }
 });
@@ -26,26 +26,38 @@ var articleSchema = Schema({
 var memberSchema = Schema({
     _id: Schema.Types.ObjectId,
   name   : String,
+  prenom   : String,
   login  : String,
   mail : String,
+  campany:String,
   adresse: String,
+  ville: String,
+  pays: String,
+  poste: String,
   password :String,
   tel: String,
+  fax: String,
+  achats:[{ type: Schema.Types.ObjectId, ref: 'Article' }],
   boutique : [{ type: Schema.Types.ObjectId, ref: 'Article' }]
 
 });
 // Création du Model pour les commentaires
 var Article  = mongoose.model('Article', articleSchema);
 var Member  = mongoose.model('Member', memberSchema);
-
+var hash = bcrypt.hashSync('0000',10);
 var member = new Member({
   _id: new mongoose.Types.ObjectId(),
-  name   : 'omar Keskes',
+  name   : 'Omar',
+  prenom   : 'Keskes',
   login  : 'omarkeskes',
   mail : 'Keskes.om@gmail.com',
   adresse: '25 Rue Ibn Moataz Ariana',
-  password :'0000',
+  pays:'Tunisie',
+  ville:'Tunis',
+  poste:'2083',
+  password :hash,
   tel: '+216 20 661 383',
+  fax:'(00 216) 71 860 635'
 });
 
 member.save(function (err) {

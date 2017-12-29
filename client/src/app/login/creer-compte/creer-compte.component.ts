@@ -11,6 +11,14 @@ export class CreerCompteComponent implements OnInit {
   addresse : any ;
   tel : any ;
   password : any ;
+  company:any;
+  poste:any;
+  prenom:any;
+  ville:any;
+  pays:any;
+  fax:any;
+  mail:any;
+
   constructor(private loginService:LoginService) { }
 
   ngOnInit() {
@@ -18,10 +26,18 @@ export class CreerCompteComponent implements OnInit {
   register(){
     var data = {
       name : this.name,
-      mail : this.login,
+      login : this.login,
+      prenom:this.prenom,
+      mail:this.mail,
+      fax:this.fax,
+      poste:this.poste,
+      ville:this.ville,
+      pays:this.pays,
+      company:this.company,
       adresse : this.addresse,
       tel:this.tel,
-      password : this.password    }
+      password : this.password  
+      }
     this.loginService.register(data).subscribe(
       data => {console.log(data)},
       err=> {console.log(err)},

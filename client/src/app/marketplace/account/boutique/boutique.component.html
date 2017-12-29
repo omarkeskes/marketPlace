@@ -25,7 +25,23 @@
 
           <!-- BEGIN CONTENT -->
           <div class="col-md-9 col-sm-7">
-            <h1>Mes articles</h1>
+                                    <div class="content-search margin-bottom-20">
+              <div class="row">
+                <div class="col-md-6">
+                  <h1>Search result for <em>Mes articles</em></h1>
+                </div>
+                <div class="col-md-6">
+                  <form action="#">
+                    <div class="input-group">
+                      <input [(ngModel)]='listFilter' name='listFilter' type="text" placeholder="Search again" class="form-control">
+                      <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                      </span>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
             <div class="goods-page">
               <div class="goods-data clearfix">
                 <div class="table-wrapper-responsive">
@@ -37,7 +53,7 @@
                     <th class="goods-page-quantity">Quantity</th>
                     <th class="goods-page-price" colspan="2">Unit price</th>
                   </tr>
-                  <tr *ngFor='let article of articles'>
+                  <tr *ngFor='let article of articles | articleFilter:listFilter'>
                     <td class="goods-page-image">
                       <a href="javascript:;"><img src="assets/pages/img/products/{{article.photo}}" alt="Berry Lace Dress"></a>
                     </td>

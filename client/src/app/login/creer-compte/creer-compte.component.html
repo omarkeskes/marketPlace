@@ -4,87 +4,92 @@
             <li><a href="index.html">Home</a></li>
             <li class="active">Inscription</li>
         </ul>
-        <!-- BEGIN SIDEBAR & CONTENT -->
-        <div class="row margin-bottom-40">
-          <!-- BEGIN SIDEBAR -->
-
-
-          <!-- BEGIN CONTENT -->
-          <div class="col-md-12 col-sm-12">
-            <h1>Crèer un compte</h1>
-            <div class="content-form-page">
-              <div class="row">
-                <div class="col-md-7 col-sm-7">
-                  <form class="form-horizontal form-without-legend" role="form">
-                    <div class="form-group">
-                      <label for="email" class="col-lg-4 control-label">Email <span class="require">*</span></label>
-                      <div class="col-lg-8">
-                        <input [(ngModel)]="login" type="text" class="form-control" id="login" name="login">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="password" class="col-lg-4 control-label">Name <span class="require">*</span></label>
-                      <div class="col-lg-8">
+                      <!-- BEGIN PAYMENT ADDRESS -->
+              <div id="checkout" class="panel panel-default">
+                <div class="panel-heading">
+                  <h2 class="panel-title">
+                      Crèer un compte
+                  </h2>
+                </div>
+                <div id="checkout-content" class="panel-collapse collapse in">
+                  <div class="panel-body row">
+                    <div class="col-md-6 col-sm-6">
+                      <h3>Your Personal Details</h3>
+                      <div class="form-group">
+                        <label for="firstname">Nom <span class="require">*</span></label>
                         <input [(ngModel)]="name" type="text" class="form-control" id="password" name="password">
                       </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="password" class="col-lg-4 control-label">Adresse <span class="require">*</span></label>
-                      <div class="col-lg-8">
-                        <input [(ngModel)]="addresse" type="text" class="form-control" id="password" name="password">
+                      <div class="form-group">
+                        <label for="lastname">Prenom <span class="require">*</span></label>
+                        <input [(ngModel)]="prenom" type="text" class="form-control" id="password" name="password">
                       </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="password" class="col-lg-4 control-label">Telephone <span class="require">*</span></label>
-                      <div class="col-lg-8">
-                        <input [(ngModel)]="tel" type="text" class="form-control" id="password" name="password">
+                      <div class="form-group">
+                        <label for="email">Login <span class="require">*</span></label>
+                        <input [(ngModel)]="login" type="text" class="form-control" id="login" name="login">
                       </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="password" class="col-lg-4 control-label">Password <span class="require">*</span></label>
-                      <div class="col-lg-8">
+                      <div class="form-group">
+                        <label for="email">E-Mail <span class="require">*</span></label>
+                        <input [(ngModel)]="mail" type="text" class="form-control" id="mail" name="mail">
+                      </div>
+                      <div class="form-group">
+                        <label for="telephone">Telephone <span class="require">*</span></label>
+                        <input [(ngModel)]="tel" type="text" class="form-control" id="tel" name="tel">
+                      </div>
+                      <div class="form-group">
+                        <label for="fax">Fax</label>
+                        <input [(ngModel)]="fax" type="text" class="form-control" id="password" name="password">
+                      </div>
+
+                      <h3>Your Password</h3>
+                      <div class="form-group">
+                        <label for="password">Password <span class="require">*</span></label>
                         <input [(ngModel)]="password" type="password" class="form-control" id="password" name="password">
                       </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-lg-8 col-md-offset-4 padding-left-0">
-                        <a href="page-forgotton-password.html">Forget Password?</a>
+                      <div class="form-group">
+                        <label for="password-confirm">Password Confirm <span class="require">*</span></label>
+                        <input type="password" id="password-confirm" class="form-control">
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">
-                        <button (click)='register()' type="submit" class="btn btn-primary">Inscription</button>
+                    <div class="col-md-6 col-sm-6">
+                      <h3>Your Address</h3>
+                      <div class="form-group">
+                        <label for="company">Company</label>
+                       <input [(ngModel)]="company" type="text" class="form-control" id="password" name="password">
+                      </div>
+                      <div class="form-group">
+                        <label for="address1">Adresse</label>
+                        <input [(ngModel)]="addresse" type="text" class="form-control" id="password" name="password">
+                      </div>
+                      <div class="form-group">
+                        <label for="city">Ville<span class="require">*</span></label>
+                        <input [(ngModel)]="ville" type="text" class="form-control" id="password" name="password">
+                      </div>
+                      <div class="form-group">
+                        <label for="post-code">Post Code <span class="require">*</span></label>
+                        <input [(ngModel)]="poste" type="text" class="form-control" id="password" name="password">
+                      </div>
+                      <div class="form-group">
+                        <label for="country">Pays <span class="require">*</span></label>
+                           <input [(ngModel)]="pays" type="text" class="form-control" id="password" name="password">
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-10 padding-right-30">
-                        <hr>
-                        <div class="login-socio">
-                            <p class="text-muted">or login using:</p>
-                            <ul class="social-icons">
-                                <li><a href="javascript:;" data-original-title="facebook" class="facebook" title="facebook"></a></li>
-                                <li><a href="javascript:;" data-original-title="Twitter" class="twitter" title="Twitter"></a></li>
-                                <li><a href="javascript:;" data-original-title="Google Plus" class="googleplus" title="Google Plus"></a></li>
-                                <li><a href="javascript:;" data-original-title="Linkedin" class="linkedin" title="LinkedIn"></a></li>
-                            </ul>
-                        </div>
+                    <hr>
+                    <div class="col-md-12">                      
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox"> I wish to subscribe to the OXY newsletter. 
+                        </label>
                       </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" checked="checked"> My delivery and billing addresses are the same.
+                        </label>
+                      </div>
+                      <button (click)='register()' class="btn btn-primary  pull-right" type="submit" data-toggle="collapse" data-parent="#checkout-page" data-target="#shipping-address-content" id="button-payment-address">Inscription</button>                      
                     </div>
-                  </form>
-                </div>
-                <div class="col-md-4 col-sm-4 pull-right">
-                  <div class="form-info">
-                    <h2><em>Important</em> Information</h2>
-                    <p>Duis autem vel eum iriure at dolor vulputate velit esse vel molestie at dolore.</p>
-
-                    <button type="button" class="btn btn-default">More details</button>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <!-- END CONTENT -->
-        </div>
-        <!-- END SIDEBAR & CONTENT -->
+              <!-- END PAYMENT ADDRESS -->
       </div>
     </div>
