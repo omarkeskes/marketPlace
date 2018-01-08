@@ -128,9 +128,14 @@
                   </div>
                   <!--<div *ngIf='loginservice.isAuthenticated()'>-->
                   <div class="product-page-cart">
-                    <div class="product-quantity">
-                        <input id="product-quantity" type="text" value="1" readonly class="form-control input-sm">
-                    </div>
+                    <!--<div class="product-quantity">
+                        <input id="product-quantity" type="text" value="1"  class="form-control input-sm">
+                    </div>-->
+                    <select name="quantite" [(ngModel)]="quantite" >
+                      <option *ngFor="let q of quantity;let i=index" value="{{i}}">{{i+1}}</option>
+                    </select>
+
+                    
                     <button (click)='acheter()' class="btn btn-primary" type="submit">Ajouter au panier</button>
                   </div>
                   <!--</div>-->

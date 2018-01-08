@@ -13,6 +13,8 @@ export class ArticleComponent implements OnInit {
   article:any;
   text:any;
   commentaires:any;
+  quantity :any ;
+
 
   constructor(private loginservice:LoginService,private articlesService:ArticlesService,private route: ActivatedRoute,private router:Router) {
          this.route.params.subscribe(params => {
@@ -23,7 +25,7 @@ export class ArticleComponent implements OnInit {
 
   ngOnInit() {
     this.articlesService.getOneArtilce(this.id).subscribe(
-          data =>{this.article=data;console.log(this.article)},
+          data =>{this.article=data;console.log(this.article);this.quantity = Array(this.article.quantite);},
           err => {console.log(err)},
           ()=> {}
       )
@@ -36,9 +38,8 @@ export class ArticleComponent implements OnInit {
 
   error : boolean = false;
   acheter(){
-    console.log(this.article.quantite);
-    console.log(parseInt(document.getElementById("product-quantity").getAttribute("value")));
-    if (parseInt(document.getElementById("product-quantity").getAttribute("value")) <= this.article.quantite){
+   
+    
     var data={
       article:this.article._id,
       member:this.loginservice.getUser()._id
@@ -48,9 +49,7 @@ export class ArticleComponent implements OnInit {
       err =>{console.log(err)},
       ()=>{}
     );
-    }else {
-      this.error = true ;
-    }
+   
   }
   
   commentaire(){
@@ -69,5 +68,14 @@ export class ArticleComponent implements OnInit {
           err => {console.log(err)},
           ()=> {}
       )
+  }
+  up(){
+    this.quantity = this.quantity + 1;
+  }
+
+  down(){
+    if(this.quantity > 1){
+      this.quantity = this.quantity - 1 ;
+    }
   }
 }
