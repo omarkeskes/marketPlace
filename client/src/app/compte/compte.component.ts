@@ -50,23 +50,23 @@ export class CompteComponent implements OnInit {
       company:this.company,
       adresse : this.addresse,
       tel:this.tel,
-      password :  this.loginservice.getUser().password   
+      password :  this.password 
     }
 
     if(!membre.adresse){membre.adresse = this.loginservice.getUser().adresse;}
     if(!membre.name){membre.name = this.loginservice.getUser().name;}
     if(!membre.mail){membre.mail = this.loginservice.getUser().mail;}
     if(!membre.tel){membre.tel = this.loginservice.getUser().tel;}
-    if(!membre.poste){membre.adresse = this.loginservice.getUser().poste;}
-    if(!membre.fax){membre.name = this.loginservice.getUser().fax;}
-    if(!membre.login){membre.mail = this.loginservice.getUser().login;}
-    if(!membre.ville){membre.tel = this.loginservice.getUser().ville;}
-    if(!membre.prenom){membre.name = this.loginservice.getUser().prenom;}
-    if(!membre.company){membre.mail = this.loginservice.getUser().company;}
-    if(!membre.pays){membre.tel = this.loginservice.getUser().pays;}
+    if(!membre.poste){membre.poste = this.loginservice.getUser().poste;}
+    if(!membre.fax){membre.fax = this.loginservice.getUser().fax;}
+    if(!membre.login){membre.login = this.loginservice.getUser().login;}
+    if(!membre.ville){membre.ville = this.loginservice.getUser().ville;}
+    if(!membre.prenom){membre.prenom = this.loginservice.getUser().prenom;}
+    if(!membre.company){membre.company = this.loginservice.getUser().company;}
+    if(!membre.pays){membre.pays = this.loginservice.getUser().pays;}
     console.log(membre);
     this.compteservice.updateUser(membre).subscribe(
-      (data)=> {this.compte = data;console.log(this.compte);sessionStorage.setItem('login',JSON.parse(data));},
+      (data)=> {this.compte = data;console.log(this.compte);},
       (err)=> {console.log(err);},
       ()=> {}
     )

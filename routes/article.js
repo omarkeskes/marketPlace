@@ -33,7 +33,7 @@ var memberSchema = Schema({
   prenom   : String,
   login  : String,
   mail : String,
-  campany:String,
+  company:String,
   adresse: String,
   ville: String,
   pays: String,
@@ -240,8 +240,16 @@ router.post('/user/update',function(req,res,next){
             membre.name = req.body.name;
             membre.tel = req.body.tel;
             membre.adresse = req.body.adresse;
-            membre.login = req.body.mail;
+            membre.login = req.body.login;
             membre.mail = req.body.mail;
+            membre.prenom = req.body.prenom;
+            membre.fax = req.body.fax ;
+            membre.poste = req.body.poste ;
+            membre.ville = req.body.ville ;
+            membre.pays = req.body.pays;
+            membre.company = req.body.company;
+            
+            console.log(membre)
 
             if(req.body.password){
                 var hash = bcrypt.hashSync(req.body.password,10);
